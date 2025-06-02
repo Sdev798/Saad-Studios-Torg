@@ -23,25 +23,26 @@ class POMODORO:
                 tm_settings_f.close()
             self.pomo_settings = default_pomo_settings
         self.pomo_stop = False
+        self.total_seconds = self.pomo_settings['pomo'] * 60
 
 
     def intro_start_pomo(self):
+        self.pomo_stop = False
         threading.Thread(target=lambda : self.start_pomodoro()).start()
     def stop_pomodoro(self):
         self.pomo_stop = True
     def start_pomodoro(self):
-        total_seconds = self.pomo_settings['pomo'] * 60
-
-        while total_seconds >= 0:
+        while self.total_seconds >= 0:
             if self.pomo_stop:
                 break
-            countdown = datetime.timedelta(seconds=total_seconds)
-            for seconds in range(60):
-                window.ui.label.setText(f"{[total_seconds // 3600 if (total_seconds //3600) >= 1 else 0][0]}:{[total_seconds // 60 if (total_seconds // 60) >= 1 else 0][0]}:{["0" if seconds > 50 else ""][0]}{60 - seconds}")
-                time.sleep(1)
-            total_seconds -= 1
-        if self.pomo_stop:
-            return  ""
+            countdown = datetime.timedelta(seconds=self.total_seconds)
+            hours = self.total_seconds // 3600
+            minutes = self.total_seconds // 60
+            secs = self.total_seconds % 60
+            window.ui.label.setText(f"{hours:02}:{minutes:02}:{secs:02}")
+            time.sleep(1)
+            self.total_seconds -= 1
+
 
 
 
@@ -53,25 +54,36 @@ class Window(QMainWindow):
         self.ui = app.Ui_MainWindow()
         self.ui.setupUi(self)
         self.completed_task = None
+        self.pomo_service = None
         self.ui.nw_task.clicked.connect(lambda: self.set_add_task_environment())
         self.ui.addtask.clicked.connect(lambda: self.create_new_task(self.ui.taskname_add.text(), change_widget=True))
         self.ui.tabWidget.currentChanged.connect(lambda :self.verify_pomo_tab())
-        self.ui.startpomo.clicked.connect(lambda :[self.start_timer() if self.ui.startpomo.isChecked() == True else self.stop_timer()][0])
+        self.ui.startpomo.clicked.connect(lambda : self.identify_status_pomodoro_and_perform_action())
         tasks = self.check_tasks_file()
         if tasks != None:
             for task in tasks:
                 self.create_new_task(task)
         self.ui.webEngineView.stop()
     #Pomodoro Settings
+    def identify_status_pomodoro_and_perform_action(self):
+        if self.ui.startpomo.text() == "Pause":
+            self.ui.startpomo.setText("Resume")
+            self.pomo_service.stop_pomodoro()
+        else:
+            self.ui.startpomo.setText("Pause")
+            self.pomo_service.intro_start_pomo()
+
+
+
     def verify_pomo_tab(self):
         if self.ui.tabWidget.currentIndex() == 1:
-            POMODORO()
+            self.pomo_service = POMODORO()
     def start_timer(self):
         self.ui.startpomo.setText("Pause")
-        POMODORO().intro_start_pomo()
-    def stop_timer(self):
+        self.pomo_service.intro_start_pomo()
+    def pause_timer(self):
         self.ui.startpomo.setText("Resume")
-        POMODORO().stop_pomodoro()
+        self.pomo_service.stop_pomodoro()
         
 
     #To-do LSIT FUNCTIONs
