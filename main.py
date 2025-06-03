@@ -22,16 +22,11 @@ class POMODORO:
                 json.dump(default_pomo_settings, tm_settings_f)
                 tm_settings_f.close()
             self.pomo_settings = default_pomo_settings
-        self.pomo_stop = False
-        self.total_seconds = self.pomo_settings['pomo'] * 60
 
 
-    def intro_start_pomo(self):
-        self.pomo_stop = False
-        threading.Thread(target=lambda : self.start_pomodoro()).start()
-    def stop_pomodoro(self):
-        self.pomo_stop = True
-    def start_pomodoro(self):
+
+
+    def start_timer(self, time_tobe_timed, tag):
         while self.total_seconds >= 0:
             if self.pomo_stop:
                 break
@@ -42,6 +37,7 @@ class POMODORO:
             window.ui.label.setText(f"{hours:02}:{minutes:02}:{secs:02}")
             time.sleep(1)
             self.total_seconds -= 1
+            print(self.total_seconds)
 
 
 
