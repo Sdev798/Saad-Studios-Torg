@@ -43,6 +43,7 @@ class POMODORO:
     def check_state(self):
         if self.time_left <= 0:
             song = simpleaudio.WaveObject.from_wave_file("Sounds/bell-ringing-01c.mp3")
+
             playing = song.play()
             playing.wait_done()
 
