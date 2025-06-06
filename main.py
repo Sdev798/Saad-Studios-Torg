@@ -6,6 +6,8 @@ from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QMainWindow, QApplication, QCheckBox, QMessageBox, QPushButton, QGroupBox, QGridLayout, QHBoxLayout, QLabel, QSizePolicy
 import pandas as pando
 import app
+import simpleaudio
+
 import sys, time, threading, json
 from concurrent.futures import ThreadPoolExecutor
 
@@ -25,7 +27,12 @@ class POMODORO:
                 json.dump(default_pomo_settings, tm_settings_f)
                 tm_settings_f.close()
             self.pomo_settings = default_pomo_settings
+
+
         self.time_left = self.pomo_settings['pomo'] * 60
+        hours = self.time_left // 3600
+        min = self.time_left // 60
+        window.ui.label.setText(f"{hours:02}:{min:02}:00")
         self.time_preset = 0 # 0: work 1: break 2:long braekcc
         self.round = 0
         self.long_break_need_round = None
@@ -35,20 +42,54 @@ class POMODORO:
 
     def check_state(self):
         if self.time_left <= 0:
+            song = simpleaudio.WaveObject.from_wave_file("Sounds/bell-ringing-01c.mp3")
+            playing = song.play()
+            playing.wait_done()
+
             self.round = [1 if self.round == 0 else self.round][0]
             self.long_break_need_round = self.round % self.pomo_settings['loop']
             print(self.long_break_need_round, self.round)
             if self.long_break_need_round != 0 and self.time_preset <= 0: #Short Break
                 self.time_left = self.pomo_settings['break'] * 60
                 self.time_preset = 1
+                window.ui.label.setStyleSheet(u"QLabel{\n"
+"	border:1px solid rgb(198, 198, 198);\n"
+"	border-radius:10px;\n"
+"	background-color: rgb(32, 170, 178);\n"
+"	font: 300 72pt \"Poppins\";\n"
+"\n"
+"\n"
+"}")
             elif self.long_break_need_round == 0 and self.round > 0 and self.time_preset <= 0: #Long Break
                 self.time_left = self.pomo_settings['long_break'] * 60
                 self.time_preset = 2
+                window.ui.label.setStyleSheet(u"QLabel{\n"
+"	border:1px solid rgb(198, 198, 198);\n"
+"	border-radius:10px;\n"
+"	background-color: rgb(84, 9, 218);\n"
+"	font: 300 72pt \"Poppins\";\n"
+"\n"
+"\n"
+"}")
             elif self.time_preset >= 1:
                 self.time_left = self.pomo_settings['pomo'] * 60
                 self.time_preset = 0
                 self.round += 1
+                window.ui.label.setStyleSheet("QLabel{\n"
+                "	border:1px solid rgb(198, 198, 198);\n"
+                "	border-radius:10px;\n"
+                "	background-color: rgb(176, 45, 40);\n"
+                "	font: 300 72pt \"Poppins\";\n"
+                "\n"
+                "\n"
+                "}")
             window.ui.startpomo.setText("Start")
+            hours = self.time_left // 3600
+            min = self.time_left // 60
+            window.ui.label.setText(f"{hours:02}:{min:02}:00")
+
+
+
             return None
         else:
             return None
@@ -60,7 +101,6 @@ class POMODORO:
 
     def start_timer(self):
         while self.time_left >= 0:
-
             if self.pomo_stop:
                 break
             countdown = datetime.timedelta(seconds=self.time_left)
@@ -68,8 +108,10 @@ class POMODORO:
             minutes = self.time_left // 60
             secs = self.time_left % 60
             window.ui.label.setText(f"{hours:02}:{minutes:02}:{secs:02}")
+
             time.sleep(1)
             self.time_left -= 1
+
             print(self.long_break_need_round, self.round, self.time_preset)
         return self.check_state()
 
@@ -93,18 +135,31 @@ class Window(QMainWindow):
     #Pomodoro Settings
     def identify_status_pomodoro_and_perform_action(self):
         if self.ui.startpomo.text() == "Pause" or self.ui.startpomo.text() == "Resume":
-            self.ui.startpomo.setText(["Resume" if self.ui.startpomo.text() == "Pause" else "Pause"][0])
-            self.pomo_service.change_timer_direction()
-            self.pomo_service.timer_help_for_start()
+            if self.pomo_service.time_left >= 1:
+                self.pomo_service.change_timer_direction()
+                self.ui.startpomo.setDisabled(True)
+                self.ui.startpomo.setText(["Resume" if self.ui.startpomo.text() == "Pause" else "Pause"][0])
+                threading.Thread(target=lambda :self.protect_button_from_bugs()).start()
+                self.pomo_service.timer_help_for_start()
+            else:
+                self.ui.startpomo.setChecked([False if self.ui.startpomo.isChecked() else True][0])
+                self.pomo_service.timer_help_for_start()
         elif self.ui.startpomo.text() == "Start":
+            self.ui.startpomo.setDisabled(True)
+
             self.ui.startpomo.setText("Pause")
             self.pomo_service.timer_help_for_start()
+            threading.Thread(target=self.protect_button_from_bugs()).start()
 
-
+    def protect_button_from_bugs(self):
+        time.sleep(0.5)
+        self.ui.startpomo.setEnabled(True)
+        return None
 
     def verify_pomo_tab(self):
         if self.ui.tabWidget.currentIndex() == 1:
             self.pomo_service = POMODORO()
+
 
 
         

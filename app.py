@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'SaadStudio_Torg_alpha_1RmEyZv.ui'
+## Form generated from reading UI file 'SaadStudio_Torg_alpha_1NJSmVv.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.1
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -58,7 +58,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 738, 343))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 754, 343))
         self.gridLayout_9 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.gridLayout_8 = QGridLayout()
@@ -78,30 +78,6 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.gridLayout_5 = QGridLayout()
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.nw_task = QPushButton(self.groupBox)
-        self.nw_task.setObjectName(u"nw_task")
-        font1 = QFont()
-        font1.setFamilies([u"Poppins"])
-        font1.setPointSize(12)
-        font1.setWeight(QFont.DemiBold)
-        font1.setItalic(False)
-        font1.setStyleStrategy(QFont.PreferAntialias)
-        self.nw_task.setFont(font1)
-        self.nw_task.setStyleSheet(u"QPushButton{\n"
-"	color:white;\n"
-"	background-color: rgb(83, 54, 252);\n"
-"	padding:10px;\n"
-"	font: 600 12pt \"Poppins\";\n"
-"	border-radius:10px;\n"
-"}\n"
-"QPushButton::hover{\n"
-"	\n"
-"	background-color: rgb(82, 106, 226);\n"
-"\n"
-"}")
-
-        self.gridLayout_5.addWidget(self.nw_task, 0, 0, 1, 1)
-
         self.edit_task = QPushButton(self.groupBox)
         self.edit_task.setObjectName(u"edit_task")
         self.edit_task.setStyleSheet(u"QPushButton{\n"
@@ -136,6 +112,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.set_work_task, 1, 0, 1, 1)
 
+        self.nw_task = QPushButton(self.groupBox)
+        self.nw_task.setObjectName(u"nw_task")
+        font1 = QFont()
+        font1.setFamilies([u"Poppins"])
+        font1.setPointSize(12)
+        font1.setWeight(QFont.DemiBold)
+        font1.setItalic(False)
+        font1.setStyleStrategy(QFont.PreferAntialias)
+        self.nw_task.setFont(font1)
+        self.nw_task.setStyleSheet(u"QPushButton{\n"
+"	color:white;\n"
+"	background-color: rgb(83, 54, 252);\n"
+"	padding:10px;\n"
+"	font: 600 12pt \"Poppins\";\n"
+"	border-radius:10px;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	\n"
+"	background-color: rgb(82, 106, 226);\n"
+"\n"
+"}")
+
+        self.gridLayout_5.addWidget(self.nw_task, 0, 0, 1, 1)
+
 
         self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
 
@@ -152,21 +152,57 @@ class Ui_MainWindow(object):
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.gridLayout_7 = QGridLayout()
         self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.label_2 = QLabel(self.tab_2)
+        self.label_2.setObjectName(u"label_2")
+        font2 = QFont()
+        font2.setPointSize(15)
+        self.label_2.setFont(font2)
+        self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_7.addWidget(self.label_2, 7, 0, 1, 1)
+
         self.frame = QFrame(self.tab_2)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout = QHBoxLayout(self.frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.pushButton = QPushButton(self.frame)
+        self.pushButton.setObjectName(u"pushButton")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
+        self.pushButton.setMinimumSize(QSize(10, 0))
+        self.pushButton.setStyleSheet(u"QPushButton{\n"
+"	color:white;\n"
+"	background-color: rgb(97, 100, 132);\n"
+"	padding:10px;\n"
+"	font: 18pt \"Poppins\";\n"
+"	padding-left:50px;\n"
+"	padding-right:50px;\n"
+"	border-radius:10px;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	\n"
+"	background-color: rgb(196, 186, 216);\n"
+"\n"
+"}")
+
+        self.horizontalLayout.addWidget(self.pushButton)
+
         self.startpomo = QPushButton(self.frame)
         self.startpomo.setObjectName(u"startpomo")
-        font2 = QFont()
-        font2.setFamilies([u"Poppins"])
-        font2.setPointSize(28)
-        font2.setBold(False)
-        font2.setItalic(False)
-        font2.setStyleStrategy(QFont.PreferAntialias)
-        self.startpomo.setFont(font2)
+        sizePolicy.setHeightForWidth(self.startpomo.sizePolicy().hasHeightForWidth())
+        self.startpomo.setSizePolicy(sizePolicy)
+        font3 = QFont()
+        font3.setFamilies([u"Poppins"])
+        font3.setPointSize(28)
+        font3.setBold(False)
+        font3.setItalic(False)
+        font3.setStyleStrategy(QFont.PreferAntialias)
+        self.startpomo.setFont(font3)
         self.startpomo.setStyleSheet(u"QPushButton{\n"
 "	color:white;\n"
 "	background-color: rgb(97, 100, 132);\n"
@@ -190,19 +226,16 @@ class Ui_MainWindow(object):
 
         self.settingpomo = QPushButton(self.frame)
         self.settingpomo.setObjectName(u"settingpomo")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.settingpomo.sizePolicy().hasHeightForWidth())
         self.settingpomo.setSizePolicy(sizePolicy)
         self.settingpomo.setMinimumSize(QSize(189, 54))
-        font3 = QFont()
-        font3.setFamilies([u"Poppins"])
-        font3.setPointSize(18)
-        font3.setBold(False)
-        font3.setItalic(False)
-        font3.setStyleStrategy(QFont.PreferAntialias)
-        self.settingpomo.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Poppins"])
+        font4.setPointSize(18)
+        font4.setBold(False)
+        font4.setItalic(False)
+        font4.setStyleStrategy(QFont.PreferAntialias)
+        self.settingpomo.setFont(font4)
         self.settingpomo.setStyleSheet(u"QPushButton{\n"
 "	color:white;\n"
 "	background-color: rgb(97, 100, 132);\n"
@@ -232,14 +265,14 @@ class Ui_MainWindow(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy1)
-        self.label.setMinimumSize(QSize(598, 119))
-        font4 = QFont()
-        font4.setFamilies([u"Poppins"])
-        font4.setPointSize(72)
-        font4.setWeight(QFont.Light)
-        font4.setItalic(False)
-        font4.setStyleStrategy(QFont.PreferAntialias)
-        self.label.setFont(font4)
+        self.label.setMinimumSize(QSize(700, 200))
+        font5 = QFont()
+        font5.setFamilies([u"Poppins"])
+        font5.setPointSize(72)
+        font5.setWeight(QFont.Light)
+        font5.setItalic(False)
+        font5.setStyleStrategy(QFont.PreferAntialias)
+        self.label.setFont(font5)
         self.label.setStyleSheet(u"QLabel{\n"
 "	border:1px solid rgb(198, 198, 198);\n"
 "	border-radius:10px;\n"
@@ -252,17 +285,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.label, 0, 0, 1, 1)
 
-        self.worktask_pomo = QLabel(self.tab_2)
-        self.worktask_pomo.setObjectName(u"worktask_pomo")
-        self.worktask_pomo.setFont(font2)
-        self.worktask_pomo.setStyleSheet(u"font: 28pt \"Poppins\";")
-        self.worktask_pomo.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.gridLayout_7.addWidget(self.worktask_pomo, 6, 0, 1, 1)
-
         self.verticalSpacer = QSpacerItem(20, 60, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_7.addItem(self.verticalSpacer, 3, 0, 1, 1)
+
+        self.worktask_pomo = QLabel(self.tab_2)
+        self.worktask_pomo.setObjectName(u"worktask_pomo")
+        font6 = QFont()
+        font6.setFamilies([u"Poppins"])
+        font6.setPointSize(16)
+        font6.setBold(False)
+        font6.setItalic(False)
+        font6.setStyleStrategy(QFont.PreferAntialias)
+        self.worktask_pomo.setFont(font6)
+        self.worktask_pomo.setStyleSheet(u"font: 16pt \"Poppins\";")
+        self.worktask_pomo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_7.addWidget(self.worktask_pomo, 8, 0, 1, 1)
 
 
         self.gridLayout_13.addLayout(self.gridLayout_7, 0, 0, 1, 1)
@@ -419,7 +458,7 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab_5, "")
 
-        self.gridLayout_2.addWidget(self.tabWidget, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.tabWidget, 1, 0, 1, 1)
 
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QWidget()
@@ -494,7 +533,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -503,10 +542,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Config", None))
-        self.nw_task.setText(QCoreApplication.translate("MainWindow", u"New Task", None))
         self.edit_task.setText(QCoreApplication.translate("MainWindow", u"Edit Task", None))
         self.set_work_task.setText(QCoreApplication.translate("MainWindow", u"Set Working Task", None))
+        self.nw_task.setText(QCoreApplication.translate("MainWindow", u"New Task", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), QCoreApplication.translate("MainWindow", u"Task Managment", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"#0", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
         self.startpomo.setText(QCoreApplication.translate("MainWindow", u"Start", None))
         self.settingpomo.setText(QCoreApplication.translate("MainWindow", u" Settings", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"00:00:00", None))

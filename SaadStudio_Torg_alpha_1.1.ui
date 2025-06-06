@@ -18,17 +18,17 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QTabWidget" name="tabWidget">
           <property name="tabShape">
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="elideMode">
            <enum>Qt::TextElideMode::ElideNone</enum>
@@ -65,7 +65,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>738</width>
+                 <width>754</width>
                  <height>343</height>
                 </rect>
                </property>
@@ -175,6 +175,21 @@ QPushButton::hover{
            <layout class="QGridLayout" name="gridLayout_13">
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_7">
+              <item row="7" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>#0</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
               <item row="2" column="0">
                <widget class="QFrame" name="frame">
                 <property name="frameShape">
@@ -185,7 +200,48 @@ QPushButton::hover{
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout">
                  <item>
+                  <widget class="QPushButton" name="pushButton">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>10</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+	color:white;
+	background-color: rgb(97, 100, 132);
+	padding:10px;
+	font: 18pt &quot;Poppins&quot;;
+	padding-left:50px;
+	padding-right:50px;
+	border-radius:10px;
+}
+QPushButton::hover{
+	
+	background-color: rgb(196, 186, 216);
+
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>Reset</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QPushButton" name="startpomo">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="font">
                     <font>
                      <family>Poppins</family>
@@ -225,7 +281,7 @@ QPushButton::checked{
                  <item>
                   <widget class="QPushButton" name="settingpomo">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -288,8 +344,8 @@ QPushButton::hover{
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>598</width>
-                  <height>119</height>
+                  <width>700</width>
+                  <height>200</height>
                  </size>
                 </property>
                 <property name="font">
@@ -319,28 +375,6 @@ QPushButton::hover{
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="worktask_pomo">
-                <property name="font">
-                 <font>
-                  <family>Poppins</family>
-                  <pointsize>28</pointsize>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                  <stylestrategy>PreferAntialias</stylestrategy>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 28pt &quot;Poppins&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>Current Working Task : Unknow</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
               <item row="3" column="0">
                <spacer name="verticalSpacer">
                 <property name="orientation">
@@ -353,6 +387,28 @@ QPushButton::hover{
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="worktask_pomo">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>16</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                  <stylestrategy>PreferAntialias</stylestrategy>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 16pt &quot;Poppins&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Current Working Task : Unknow</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
