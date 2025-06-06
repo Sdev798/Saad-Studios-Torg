@@ -7,10 +7,13 @@ from PySide6.QtWidgets import QMainWindow, QApplication, QCheckBox, QMessageBox,
 import pandas as pando
 import app
 import sys, time, threading, json
+from concurrent.futures import ThreadPoolExecutor
 
-
+#set Main Settings
 class POMODORO:
     def __init__(self, working_task=None):
+        #Change Main Settings For complete our task
+
         #Gather Settings
         self.pomo_settings = None
         try:
@@ -22,26 +25,53 @@ class POMODORO:
                 json.dump(default_pomo_settings, tm_settings_f)
                 tm_settings_f.close()
             self.pomo_settings = default_pomo_settings
+        self.time_left = self.pomo_settings['pomo'] * 60
+        self.time_preset = 0 # 0: work 1: break 2:long braekcc
+        self.round = 0
+        self.long_break_need_round = None
+        self.pomo_stop = False
 
 
 
+    def check_state(self):
+        if self.time_left <= 0:
+            self.round = [1 if self.round == 0 else self.round][0]
+            self.long_break_need_round = self.round % self.pomo_settings['loop']
+            print(self.long_break_need_round, self.round)
+            if self.long_break_need_round != 0 and self.time_preset <= 0: #Short Break
+                self.time_left = self.pomo_settings['break'] * 60
+                self.time_preset = 1
+            elif self.long_break_need_round == 0 and self.round > 0 and self.time_preset <= 0: #Long Break
+                self.time_left = self.pomo_settings['long_break'] * 60
+                self.time_preset = 2
+            elif self.time_preset >= 1:
+                self.time_left = self.pomo_settings['pomo'] * 60
+                self.time_preset = 0
+                self.round += 1
+            window.ui.startpomo.setText("Start")
+            return None
+        else:
+            return None
+    def timer_help_for_start(self):
+        threading.Thread(target=lambda: self.start_timer()).start()
 
-    def start_timer(self, time_tobe_timed, tag):
-        while self.total_seconds >= 0:
+    def change_timer_direction(self):
+        self.pomo_stop = not self.pomo_stop
+
+    def start_timer(self):
+        while self.time_left >= 0:
+
             if self.pomo_stop:
                 break
-            countdown = datetime.timedelta(seconds=self.total_seconds)
-            hours = self.total_seconds // 3600
-            minutes = self.total_seconds // 60
-            secs = self.total_seconds % 60
+            countdown = datetime.timedelta(seconds=self.time_left)
+            hours = self.time_left // 3600
+            minutes = self.time_left // 60
+            secs = self.time_left % 60
             window.ui.label.setText(f"{hours:02}:{minutes:02}:{secs:02}")
             time.sleep(1)
-            self.total_seconds -= 1
-            print(self.total_seconds)
-
-
-
-
+            self.time_left -= 1
+            print(self.long_break_need_round, self.round, self.time_preset)
+        return self.check_state()
 
 
 class Window(QMainWindow):
@@ -62,24 +92,21 @@ class Window(QMainWindow):
         self.ui.webEngineView.stop()
     #Pomodoro Settings
     def identify_status_pomodoro_and_perform_action(self):
-        if self.ui.startpomo.text() == "Pause":
-            self.ui.startpomo.setText("Resume")
-            self.pomo_service.stop_pomodoro()
-        else:
+        if self.ui.startpomo.text() == "Pause" or self.ui.startpomo.text() == "Resume":
+            self.ui.startpomo.setText(["Resume" if self.ui.startpomo.text() == "Pause" else "Pause"][0])
+            self.pomo_service.change_timer_direction()
+            self.pomo_service.timer_help_for_start()
+        elif self.ui.startpomo.text() == "Start":
             self.ui.startpomo.setText("Pause")
-            self.pomo_service.intro_start_pomo()
+            self.pomo_service.timer_help_for_start()
 
 
 
     def verify_pomo_tab(self):
         if self.ui.tabWidget.currentIndex() == 1:
             self.pomo_service = POMODORO()
-    def start_timer(self):
-        self.ui.startpomo.setText("Pause")
-        self.pomo_service.intro_start_pomo()
-    def pause_timer(self):
-        self.ui.startpomo.setText("Resume")
-        self.pomo_service.stop_pomodoro()
+
+
         
 
     #To-do LSIT FUNCTIONs
