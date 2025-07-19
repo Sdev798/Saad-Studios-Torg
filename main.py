@@ -1,17 +1,15 @@
 import datetime
-import os
+import os, random
+import pandas as pd
+import numpy
 from PySide6.QtGui import QKeySequence
-from PySide6.QtCore import Qt
-from PySide6.QtCore import Slot
-from PySide6.QtWidgets import QMainWindow, QApplication, QCheckBox, QMessageBox, QPushButton, QGroupBox, QGridLayout, QHBoxLayout, QLabel, QSizePolicy
-import pandas as pando
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtWidgets import (QMainWindow, QApplication, QCheckBox, QMessageBox, QFrame,
+                               QPushButton, QGroupBox, QGridLayout, QScrollArea, QSpacerItem,
+                               QHBoxLayout, QLabel, QSizePolicy, QToolButton, QWidget)
 import app
-import simpleaudio
-
 import sys, time, threading, json
-from concurrent.futures import ThreadPoolExecutor
 
-#set Main Settings
 class POMODORO:
     def __init__(self, working_task=None):
         #Change Main Settings For complete our task
@@ -42,10 +40,7 @@ class POMODORO:
 
     def check_state(self):
         if self.time_left <= 0:
-            song = simpleaudio.WaveObject.from_wave_file("Sounds/bell-ringing-01c.mp3")
 
-            playing = song.play()
-            playing.wait_done()
 
             self.round = [1 if self.round == 0 else self.round][0]
             self.long_break_need_round = self.round % self.pomo_settings['loop']
@@ -117,21 +112,124 @@ class POMODORO:
         return self.check_state()
 
 
+
+class TaskManagement:
+    def __init__(self):
+        try:
+            self.df_task = pd.read_csv("task_manage.csv")
+            self.df_task = self.df_task.set_index("Date")
+        except:
+            #Creeate new df
+            self.df_task = pd.DataFrame({"Date":["WELCOME"],
+                                        "Name":["Welcome To torg"],
+                                         "Description":["Thank you for choosing our app, if found any bug or glitch just tell as in saadstudios2008@gmail.com"],
+                                         "custom_text":["do it man"]})
+            self.df_task = self.df_task.set_index("Date")
+            self.df_task.to_csv("task_manage.csv")
+    def get_all_task_name(self):
+        return list(self.df_task['Name']) , list(self.df_task.index), list(self.df_task['custom_text'])
+
+    def create_new_task_item(self, name, description=None, custom_text=None):
+        current_time = (datetime.datetime.now()).strftime("%H:%M:%S")
+        self.df_task.loc[current_time] = [name, description, custom_text]
+        self.df_task.to_csv("task_manage.csv", index=True)
+        return current_time
+
+    def complete_task(self, time_date):
+        self.df_task = self.df_task.drop(time_date)
+        self.df_task.to_csv("task_manage.csv")
+
+
+
+
+
+
+
+
+class WidgetManager(QWidget):
+    def __init__(self):
+        super().__init__()
+    def fill(self, widget, data, layout_name=None, index=None, check_button_text=None):
+        if widget == QScrollArea:
+            for item, time_item, custom_text_button in zip(data, index, check_button_text):
+                frame = QFrame()
+                frame.setObjectName(item)
+                frame_layout = QGridLayout()
+                add_item_name = QLabel(item)
+                add_item_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
+                add_item_check_button = QPushButton(["Check" if type(custom_text_button) == float or custom_text_button == "" else custom_text_button][0])
+                add_item_check_button.setMinimumSize(QSize(100, 30))
+                add_item_check_button.setStyleSheet(f"""
+                    QPushButton{{
+                        border:3px solid rgb(194, 15, 15);
+                        border-radius:5px;
+                        background-color:rgb(255, 255, 255);
+                    }}
+                    QPushButton::hover{{
+                        border-color:rgb(0, 209, 101);
+                    }}
+                    
+                """)
+                add_item_check_button.setObjectName(time_item)
+                add_item_check_button.clicked.connect(lambda : window.complete_task_process(add_item_check_button.objectName()))
+                add_item_tool_button = QToolButton()
+                add_item_tool_button.setText("...")
+                add_item_tool_button.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+                add_item_tool_button.setMinimumSize(QSize(90, 10))
+                add_item_time = QLabel(f"{time_item}")
+                add_item_time.setAlignment(Qt.AlignmentFlag.AlignCenter)
+                add_item_time.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+                add_item_time.setMinimumSize(QSize(90, 10))
+                frame_layout.addWidget(add_item_name, 0, 0)
+                frame_layout.addWidget(add_item_tool_button, 0, 1)
+                frame_layout.addWidget(add_item_check_button, 1, 0)
+                frame_layout.addWidget(add_item_time, 1, 1)
+                frame.setLayout(frame_layout)
+                layout_name.addWidget(frame)
+                frame.setStyleSheet(f"""
+                QFrame{{
+                    border:1px solid rgb(189, 189, 189);
+                    border-radius:{random.randint(0, 10)}px;
+                }}
+                
+                """)
+            spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+            layout_name.addItem(spacer)
+    def delete_all_items(self, layout_name):
+        for widget_position in range(layout_name.count()):
+            layout_item = layout_name.itemAt(widget_position)
+            try:
+                if layout_item.widget() is not None:
+                    layout_item.widget().deleteLater()
+                elif layout_item.spacerItem():
+                    window.ui.gridLayout_8.removeItem(layout_item)
+                window.update()
+            except:pass
+
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
+        #App Settings
         self.ui = app.Ui_MainWindow()
         self.ui.setupUi(self)
-        self.completed_task = None
         self.pomo_service = None
-        self.ui.nw_task.clicked.connect(lambda: self.set_add_task_environment())
-        self.ui.addtask.clicked.connect(lambda: self.create_new_task(self.ui.taskname_add.text(), change_widget=True))
-        self.ui.tabWidget.currentChanged.connect(lambda :self.verify_pomo_tab())
+        self.task_management_service = TaskManagement()
+        self.widget_service = WidgetManager()
+        self.ui.stackedWidget.setCurrentIndex(0)
+        self.verify_tab()
+        self.task_filling_proccessing()
+
+
+        #Buttons
+        self.ui.nw_task.clicked.connect(lambda: self.prepare_widgets_for_new_data())
+        self.ui.addtask.clicked.connect(lambda: self.create_new_task_process(self.ui.taskname_add.text(),
+                                                                             description=self.ui.task_description.toPlainText(),
+                                                                             custom_text=self.ui.checkbuttontext.text()))
+        self.ui.tabWidget.currentChanged.connect(lambda :self.verify_tab())
         self.ui.startpomo.clicked.connect(lambda : self.identify_status_pomodoro_and_perform_action())
-        tasks = self.check_tasks_file()
-        if tasks != None:
-            for task in tasks:
-                self.create_new_task(task)
+
+
         self.ui.webEngineView.stop()
     #Pomodoro Settings
     def identify_status_pomodoro_and_perform_action(self):
@@ -157,64 +255,49 @@ class Window(QMainWindow):
         self.ui.startpomo.setEnabled(True)
         return None
 
-    def verify_pomo_tab(self):
+    def verify_tab(self):
         if self.ui.tabWidget.currentIndex() == 1:
             self.pomo_service = POMODORO()
 
 
+    def prepare_widgets_for_new_data(self):
+        self.ui.taskname_add.clear()
+        self.ui.task_description.clear()
+        self.ui.checkbuttontext.clear()
+        self.ui.stackedWidget.setCurrentIndex(1)
+
+    def create_new_task_process(self, name, description=None, custom_text=None):
+        task_item_time = (self.task_management_service.create_new_task_item(name=name, description=description, custom_text=custom_text))
+        self.task_filling_proccessing()
+        self.ui.stackedWidget.setCurrentIndex(0)
+
+    def task_filling_proccessing(self):
+        task_data , dates, custom_text = self.task_management_service.get_all_task_name()
+        for frame_time, count in zip(dates, range(self.ui.gridLayout_8.count())):
+            item = self.ui.gridLayout_8.itemAt(count)
+            print(item)
+            try:
+                if item.widget() is not None:
+                    item.widget().deleteLater()
+                elif item.spacerItem():
+                    self.ui.gridLayout_8.removeItem(item)
+                self.update()
+            except:pass
+
+        self.widget_service.fill(widget=QScrollArea, layout_name=self.ui.gridLayout_8,
+                                 index=dates,
+                                 data=task_data,
+                                 check_button_text=custom_text)
+
+
+    def complete_task_process(self, time_date):
+        self.task_management_service.complete_task(time_date)
+        self.widget_service.delete_all_items(self.ui.gridLayout_8)
+        self.task_filling_proccessing()
+
 
         
 
-    #To-do LSIT FUNCTIONs
-    def set_add_task_environment(self):
-        self.ui.taskname_add.setFocus()
-        self.ui.addtask.setShortcut(QKeySequence(Qt.Key.Key_Return))  # Enter Key
-        self.ui.stackedWidget.setCurrentIndex(1)
-    def check_tasks_file(self):
-        try:
-            dt = pando.read_csv("tasks.csv")
-        except: return None
-        return list(dt["Tasks"])
-    @Slot()
-    def done_task_function(self, task_obj_name):
-        #remove button
-        if task_obj_name:
-            widget = self.findChildren(QGroupBox, name=task_obj_name)
-            widget[0].deleteLater()
-        #Play saound
-        #Remove task from list
-    #Need Edit
-    def create_new_task(self, name, change_widget=False, description=None):
-        if not name:
-            return QMessageBox.information(self, "No task Name", "Please fill required input!", QMessageBox.Ok)
-        self.grp_box = QGroupBox(self)
-        try:
-            self.grp_box.setTitle(name)
-        except TypeError:
-            self.grp_box.setTitle("#UNSUPPORTED NAME")
-        self.grp_box.setMinimumHeight(20)
-        self.grp_box.setObjectName(f"TASK_{name}")
-        self.grp_box.setMinimumHeight(100)
-        layout_f_grpbox = QHBoxLayout(self.grp_box)
-        self.ui.gridLayout_8.addWidget(self.grp_box)
-       
-        check_button = QPushButton("Incompleted")
-        check_button.setCheckable(True)
-        check_button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        check_button.clicked.connect(lambda: self.done_task_function(check_button.parent().objectName()))
-        layout_f_grpbox.addWidget(check_button)
-        task_text = QLabel(description)
-        if change_widget:
-            self.ui.stackedWidget.setCurrentIndex(0)
-            self.ui.taskname_add.clear()
-        if description != None:
-            layout_f_grpbox.addWidget(task_text)
-        #Task File Managment
-        try:
-            tsk_file_dt = pando.DataFrame(pando.read_csv("Tasks.csv"))
-        except FileNotFoundError:
-            dt = pando.DataFrame({"Tasks":name}, index=[0])
-            dt.to_csv("Tasks.csv")
 
 
 if __name__ == "__main__":
