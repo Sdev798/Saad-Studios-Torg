@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'SaadStudio_Torg_alpha_1nvHfeY.ui'
+## Form generated from reading UI file 'SaadStudio_Torg_alpha_1ToTClz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -16,12 +16,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWidgets import (QApplication, QCommandLinkButton, QFrame, QGridLayout,
-    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-    QListWidget, QListWidgetItem, QMainWindow, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QStatusBar, QTabWidget, QTextBrowser, QTextEdit,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QCommandLinkButton, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLineEdit, QListWidget, QListWidgetItem, QMainWindow,
+    QPlainTextEdit, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QStackedWidget, QStatusBar, QTabWidget,
+    QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -57,15 +57,16 @@ class Ui_MainWindow(object):
         self.nw_task = QPushButton(self.tab1)
         self.nw_task.setObjectName(u"nw_task")
         self.nw_task.setStyleSheet(u"QPushButton{\n"
-"	color:white;\n"
-"	background-color: rgb(83, 54, 252);\n"
-"	padding:10px;\n"
-"	font: 600 12pt \"Poppins\";\n"
+"	color:rgb(226, 114, 91);\n"
+"	background-color: rgb(251, 206, 177);\n"
+"	margin:5px;\n"
+"	font: 18pt \"Poppins\";\n"
 "	border-radius:10px;\n"
 "}\n"
 "QPushButton::hover{\n"
 "	\n"
-"	background-color: rgb(82, 106, 226);\n"
+"	\n"
+"	background-color: rgb(220, 181, 155);\n"
 "\n"
 "}")
 
@@ -82,7 +83,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1038, 621))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 96, 26))
         self.gridLayout_9 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.gridLayout_8 = QGridLayout()
@@ -96,6 +97,7 @@ class Ui_MainWindow(object):
 
         self.watermark = QLabel(self.tab1)
         self.watermark.setObjectName(u"watermark")
+        self.watermark.setStyleSheet(u"font: 10pt \"Poppins\";")
         self.watermark.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout_4.addWidget(self.watermark, 4, 0, 1, 1)
@@ -107,7 +109,7 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setContentsMargins(7, -1, -1, -1)
         self.gridLayout_5 = QGridLayout()
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.gridLayout_5.setContentsMargins(10, -1, -1, -1)
+        self.gridLayout_5.setContentsMargins(0, -1, -1, -1)
 
         self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
 
@@ -146,18 +148,17 @@ class Ui_MainWindow(object):
         self.pushButton.setSizePolicy(sizePolicy)
         self.pushButton.setMinimumSize(QSize(10, 0))
         self.pushButton.setStyleSheet(u"QPushButton{\n"
-"	color:white;\n"
-"	background-color: rgb(41, 44, 109);\n"
+"	color:rgb(251, 206, 177);\n"
+"	background-color: rgb(240, 128, 128);\n"
 "	padding:10px;\n"
 "	font: 18pt \"Poppins\";\n"
-"	border:1px solid rgb(250, 237, 240);\n"
 "	padding-left:50px;\n"
 "	padding-right:50px;\n"
 "	border-radius:10px;\n"
 "}\n"
 "QPushButton::hover{\n"
 "	\n"
-"		border-color:rgb(240, 84, 84);\n"
+"	background-color: rgb(1, 81, 131);\n"
 "\n"
 "}")
 
@@ -175,9 +176,8 @@ class Ui_MainWindow(object):
         font2.setStyleStrategy(QFont.PreferAntialias)
         self.startpomo.setFont(font2)
         self.startpomo.setStyleSheet(u"QPushButton{\n"
-"	color:white;\n"
-"	background-color: rgb(41, 44, 109);\n"
-"	border:1px solid rgb(250, 237, 240);\n"
+"	color:rgb(226, 114, 91);\n"
+"	background-color: rgb(251, 206, 177);\n"
 "	padding:10px;\n"
 "	font: 28pt \"Poppins\";\n"
 "	padding-left:50px;\n"
@@ -186,11 +186,14 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton::hover{\n"
 "	\n"
-"	border-color:rgb(240, 84, 84);\n"
+"	\n"
+"	background-color: rgb(220, 181, 155);\n"
 "\n"
 "}\n"
 "QPushButton::checked{\n"
-"	background-color: rgb(40, 51, 112);\n"
+"	\n"
+"	\n"
+"	background-color: rgb(244, 201, 172);\n"
 "}")
         self.startpomo.setCheckable(True)
 
@@ -209,18 +212,18 @@ class Ui_MainWindow(object):
         font3.setStyleStrategy(QFont.PreferAntialias)
         self.settingpomo.setFont(font3)
         self.settingpomo.setStyleSheet(u"QPushButton{\n"
-"	color:white;\n"
-"	background-color: rgb(41, 44, 109);\n"
+"	color:rgb(251, 206, 177);\n"
+"	background-color: rgb(240, 128, 128);\n"
 "	padding:10px;\n"
 "	font: 18pt \"Poppins\";\n"
-"	border:1px solid rgb(250, 237, 240);\n"
 "	padding-left:50px;\n"
 "	padding-right:50px;\n"
 "	border-radius:10px;\n"
 "}\n"
 "QPushButton::hover{\n"
 "	\n"
-"		border-color:rgb(240, 84, 84);\n"
+"	background-color: rgb(1, 81, 131);\n"
+"\n"
 "}")
         self.settingpomo.setIconSize(QSize(32, 32))
         self.settingpomo.setCheckable(False)
@@ -246,9 +249,8 @@ class Ui_MainWindow(object):
         font4.setStyleStrategy(QFont.PreferAntialias)
         self.label.setFont(font4)
         self.label.setStyleSheet(u"QLabel{\n"
-"	border:1px solid rgb(198, 198, 198);\n"
 "	border-radius:10px;\n"
-"	background-color: rgb(176, 45, 40);\n"
+"	border:3px solid rgb(185, 23, 26);\n"
 "	font: 300 72pt \"Poppins\";\n"
 "\n"
 "\n"
@@ -283,15 +285,106 @@ class Ui_MainWindow(object):
         self.tab_5.setObjectName(u"tab_5")
         self.gridLayout_10 = QGridLayout(self.tab_5)
         self.gridLayout_10.setObjectName(u"gridLayout_10")
-        self.note = QTextEdit(self.tab_5)
-        self.note.setObjectName(u"note")
+        self.verticalLayout_3 = QVBoxLayout()
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, -1, -1, -1)
+        self.addbutton = QPushButton(self.tab_5)
+        self.addbutton.setObjectName(u"addbutton")
+        self.addbutton.setStyleSheet(u"QPushButton{\n"
+"	color:rgb(226, 114, 91);\n"
+"	background-color: rgb(251, 206, 177);\n"
+"	margin:5px;\n"
+"	font: 18pt \"Poppins\";\n"
+"	border-radius:10px;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(220, 181, 155);\n"
+"\n"
+"}")
 
-        self.gridLayout_10.addWidget(self.note, 0, 3, 1, 1)
+        self.verticalLayout_3.addWidget(self.addbutton)
 
-        self.tasklist_2 = QListWidget(self.tab_5)
-        self.tasklist_2.setObjectName(u"tasklist_2")
+        self.removebutton = QPushButton(self.tab_5)
+        self.removebutton.setObjectName(u"removebutton")
+        self.removebutton.setStyleSheet(u"QPushButton{\n"
+"	color:rgb(226, 114, 91);\n"
+"	background-color: rgb(251, 206, 177);\n"
+"	margin:5px;\n"
+"	font: 18pt \"Poppins\";\n"
+"	border-radius:10px;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(220, 181, 155);\n"
+"\n"
+"}")
 
-        self.gridLayout_10.addWidget(self.tasklist_2, 0, 0, 1, 1)
+        self.verticalLayout_3.addWidget(self.removebutton)
+
+        self.hidebutton = QPushButton(self.tab_5)
+        self.hidebutton.setObjectName(u"hidebutton")
+        self.hidebutton.setStyleSheet(u"QPushButton{\n"
+"	color:rgb(226, 114, 91);\n"
+"	background-color: rgb(251, 206, 177);\n"
+"	margin:5px;\n"
+"	font: 18pt \"Poppins\";\n"
+"	border-radius:10px;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	\n"
+"	\n"
+"	background-color: rgb(220, 181, 155);\n"
+"\n"
+"}")
+
+        self.verticalLayout_3.addWidget(self.hidebutton)
+
+        self.listWidget = QListWidget(self.tab_5)
+        self.listWidget.setObjectName(u"listWidget")
+        self.listWidget.setMinimumSize(QSize(0, 570))
+        self.listWidget.setStyleSheet(u"border:3px solid rgb(255, 128, 102);\n"
+"border-radius:5px;\n"
+"margin:5px;")
+
+        self.verticalLayout_3.addWidget(self.listWidget)
+
+
+        self.gridLayout_10.addLayout(self.verticalLayout_3, 0, 0, 1, 1)
+
+        self.frame_2 = QFrame(self.tab_5)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setStyleSheet(u"margin:5px;")
+        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout_22 = QGridLayout(self.frame_2)
+        self.gridLayout_22.setObjectName(u"gridLayout_22")
+        self.gridLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_17 = QGridLayout()
+        self.gridLayout_17.setObjectName(u"gridLayout_17")
+        self.plainTextEdit = QPlainTextEdit(self.frame_2)
+        self.plainTextEdit.setObjectName(u"plainTextEdit")
+        self.plainTextEdit.setMinimumSize(QSize(800, 0))
+        self.plainTextEdit.setStyleSheet(u"border:2px solid rgb(255, 210, 180);\n"
+"border-radius:5px;")
+
+        self.gridLayout_17.addWidget(self.plainTextEdit, 0, 0, 1, 1)
+
+        self.label_5 = QLabel(self.frame_2)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setStyleSheet(u"margin:5px;")
+        self.label_5.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_17.addWidget(self.label_5, 1, 0, 1, 1)
+
+
+        self.gridLayout_22.addLayout(self.gridLayout_17, 0, 0, 1, 1)
+
+
+        self.gridLayout_10.addWidget(self.frame_2, 0, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab_5, "")
         self.tab = QWidget()
@@ -316,7 +409,7 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab_4, "")
 
-        self.gridLayout_2.addWidget(self.tabWidget, 1, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QWidget()
@@ -393,6 +486,145 @@ class Ui_MainWindow(object):
         self.gridLayout_19.addLayout(self.gridLayout_18, 0, 0, 1, 1)
 
         self.stackedWidget.addWidget(self.page_2)
+        self.page_3 = QWidget()
+        self.page_3.setObjectName(u"page_3")
+        self.gridLayout_16 = QGridLayout(self.page_3)
+        self.gridLayout_16.setObjectName(u"gridLayout_16")
+        self.gridLayout_11 = QGridLayout()
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.pushButton_3 = QPushButton(self.page_3)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+
+        self.gridLayout_11.addWidget(self.pushButton_3, 9, 0, 1, 1)
+
+        self.label_6 = QLabel(self.page_3)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setStyleSheet(u"color: rgb(255, 0, 4);")
+
+        self.gridLayout_11.addWidget(self.label_6, 6, 0, 1, 1)
+
+        self.password_line = QLineEdit(self.page_3)
+        self.password_line.setObjectName(u"password_line")
+        self.password_line.setStyleSheet(u"font: 10pt \"Poppins\";")
+        self.password_line.setEchoMode(QLineEdit.EchoMode.Password)
+
+        self.gridLayout_11.addWidget(self.password_line, 4, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_11.addItem(self.verticalSpacer_2, 11, 0, 1, 1)
+
+        self.showpass = QCheckBox(self.page_3)
+        self.showpass.setObjectName(u"showpass")
+        self.showpass.setStyleSheet(u"font: 11pt \"Poppins\";")
+
+        self.gridLayout_11.addWidget(self.showpass, 7, 0, 1, 1)
+
+        self.notename = QLineEdit(self.page_3)
+        self.notename.setObjectName(u"notename")
+
+        self.gridLayout_11.addWidget(self.notename, 3, 0, 1, 1)
+
+        self.set_password_button = QPushButton(self.page_3)
+        self.set_password_button.setObjectName(u"set_password_button")
+        self.set_password_button.setStyleSheet(u"font: 11pt \"Poppins\";")
+
+        self.gridLayout_11.addWidget(self.set_password_button, 8, 0, 1, 1)
+
+        self.line = QFrame(self.page_3)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.gridLayout_11.addWidget(self.line, 1, 0, 1, 1)
+
+        self.line_2 = QFrame(self.page_3)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.gridLayout_11.addWidget(self.line_2, 12, 0, 1, 1)
+
+        self.company_watermark = QLabel(self.page_3)
+        self.company_watermark.setObjectName(u"company_watermark")
+        self.company_watermark.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_11.addWidget(self.company_watermark, 13, 0, 1, 1)
+
+        self.label_4 = QLabel(self.page_3)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setStyleSheet(u"font: 10pt \"Poppins\";")
+
+        self.gridLayout_11.addWidget(self.label_4, 2, 0, 1, 1)
+
+        self.security_watermark = QLabel(self.page_3)
+        self.security_watermark.setObjectName(u"security_watermark")
+        self.security_watermark.setStyleSheet(u"font: 28pt \"Poppins\";")
+        self.security_watermark.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_11.addWidget(self.security_watermark, 0, 0, 1, 1)
+
+
+        self.gridLayout_16.addLayout(self.gridLayout_11, 0, 0, 1, 1)
+
+        self.stackedWidget.addWidget(self.page_3)
+        self.page_4 = QWidget()
+        self.page_4.setObjectName(u"page_4")
+        self.gridLayout_24 = QGridLayout(self.page_4)
+        self.gridLayout_24.setObjectName(u"gridLayout_24")
+        self.gridLayout_23 = QGridLayout()
+        self.gridLayout_23.setObjectName(u"gridLayout_23")
+        self.showpassword_m = QCheckBox(self.page_4)
+        self.showpassword_m.setObjectName(u"showpassword_m")
+
+        self.gridLayout_23.addWidget(self.showpassword_m, 5, 1, 1, 1)
+
+        self.label_8 = QLabel(self.page_4)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setStyleSheet(u"font:34pt \"Poppins\";")
+        self.label_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_23.addWidget(self.label_8, 0, 1, 1, 1)
+
+        self.set_master_password = QPushButton(self.page_4)
+        self.set_master_password.setObjectName(u"set_master_password")
+        self.set_master_password.setStyleSheet(u"font: 16pt \"Poppins\";")
+
+        self.gridLayout_23.addWidget(self.set_master_password, 7, 1, 1, 1)
+
+        self.password_master_password = QLineEdit(self.page_4)
+        self.password_master_password.setObjectName(u"password_master_password")
+        self.password_master_password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.password_master_password.setClearButtonEnabled(True)
+
+        self.gridLayout_23.addWidget(self.password_master_password, 4, 1, 1, 1)
+
+        self.remenber_password = QCheckBox(self.page_4)
+        self.remenber_password.setObjectName(u"remenber_password")
+
+        self.gridLayout_23.addWidget(self.remenber_password, 6, 1, 1, 1)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_23.addItem(self.verticalSpacer_3, 9, 1, 1, 1)
+
+        self.label_7 = QLabel(self.page_4)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setStyleSheet(u"font: 900 15pt \"Poppins\";")
+
+        self.gridLayout_23.addWidget(self.label_7, 3, 1, 1, 1)
+
+        self.label_9 = QLabel(self.page_4)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setStyleSheet(u"font: 14pt \"Poppins\";")
+        self.label_9.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_23.addWidget(self.label_9, 10, 1, 1, 1)
+
+
+        self.gridLayout_24.addLayout(self.gridLayout_23, 0, 0, 1, 1)
+
+        self.stackedWidget.addWidget(self.page_4)
 
         self.gridLayout.addWidget(self.stackedWidget, 0, 0, 1, 1)
 
@@ -403,8 +635,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -413,7 +645,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.nw_task.setText(QCoreApplication.translate("MainWindow", u"+", None))
-        self.watermark.setText(QCoreApplication.translate("MainWindow", u"Saad Studios Corporation Co, LTD / Saad Studios Torg V1.2 Alpha", None))
+        self.watermark.setText(QCoreApplication.translate("MainWindow", u"Saad Studios Corporation Co, LTD / Saad Studios Torg V1.2.2 Alpha", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), QCoreApplication.translate("MainWindow", u"Task Managment", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"#0", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
@@ -422,6 +654,10 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"00:00:00", None))
         self.worktask_pomo.setText(QCoreApplication.translate("MainWindow", u"Current Working Task : Unknow", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Pomodoro Timer", None))
+        self.addbutton.setText(QCoreApplication.translate("MainWindow", u"+", None))
+        self.removebutton.setText(QCoreApplication.translate("MainWindow", u"-", None))
+        self.hidebutton.setText(QCoreApplication.translate("MainWindow", u"<", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Secured By Saad Studios Security", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("MainWindow", u"Note", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Youtube", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Statistics", None))
@@ -432,5 +668,23 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Simplicity is our goal if you want many features Create your app Now by Visiting Our Website", None))
         self.addtask.setText(QCoreApplication.translate("MainWindow", u"Add New Task", None))
         self.task_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Decription for your task Mr.", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Set The Master Password as a Passphrase for this Note", None))
+        self.label_6.setText("")
+        self.password_line.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Password", None))
+        self.showpass.setText(QCoreApplication.translate("MainWindow", u"Show Password", None))
+        self.notename.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Note Name", None))
+        self.set_password_button.setText(QCoreApplication.translate("MainWindow", u"Set Password", None))
+        self.company_watermark.setText(QCoreApplication.translate("MainWindow", u"Secured By Saad Studios Security / Saad Studios Technology Co, LTD / Saad Studios Torg V1.2.2 Alpha", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Please Set Your Password For Protect Your Note", None))
+        self.security_watermark.setText(QCoreApplication.translate("MainWindow", u"Saad Studios Security", None))
+        self.showpassword_m.setText(QCoreApplication.translate("MainWindow", u"Show Password", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Saad Studios Security", None))
+        self.set_master_password.setText(QCoreApplication.translate("MainWindow", u"Set Master Password", None))
+        self.password_master_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Master Password", None))
+        self.remenber_password.setText(QCoreApplication.translate("MainWindow", u"Remember Password ", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Dear User,\n"
+"Your Security  is Very Important\n"
+"Please Set You Master Password For Protect Your Notes ", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Secured By Saad Studios Security / Saad Studios Technology Co, LTD / Saad Studios Torg 1.2", None))
     # retranslateUi
 
