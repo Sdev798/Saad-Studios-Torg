@@ -1,7 +1,9 @@
 import datetime
 import os, random
 import pandas as pd
-import numpy
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Protocol.KDF import PBKDF2
 from PySide6.QtGui import QKeySequence
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtWidgets import (QMainWindow, QApplication, QCheckBox, QMessageBox, QFrame,
@@ -9,6 +11,13 @@ from PySide6.QtWidgets import (QMainWindow, QApplication, QCheckBox, QMessageBox
                                QHBoxLayout, QLabel, QSizePolicy, QToolButton, QWidget)
 import app
 import sys, time, threading, json
+
+class Encryptor:
+    def verify_password_security(self, password):
+        upper = False
+        lower = False
+    def create_key(self, password, special_salt):
+        pass
 
 class POMODORO:
     def __init__(self, working_task=None):
@@ -111,8 +120,6 @@ class POMODORO:
             print(self.long_break_need_round, self.round, self.time_preset)
         return self.check_state()
 
-
-
 class TaskManagement:
     def __init__(self):
         try:
@@ -138,13 +145,6 @@ class TaskManagement:
     def complete_task(self, time_date):
         self.df_task = self.df_task.drop(time_date)
         self.df_task.to_csv("task_manage.csv")
-
-
-
-
-
-
-
 
 class WidgetManager(QWidget):
     def __init__(self):
